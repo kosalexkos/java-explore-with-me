@@ -19,22 +19,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StatsController {
     @Autowired
-    private final StatsService statsService;
-    public final String DATE_TIME = "yyyy-MM-dd HH:mm:ss";
+    private final StatsService service;
+    public final String dateTime = "yyyy-MM-dd HH:mm:ss";
 
     @PostMapping("/hit")
     public void addHit(@RequestBody EndpointHitDto endpointHitDto) {
         log.info("Request to create entry: {}", endpointHitDto.toString());
-        statsService.addHit(endpointHitDto);
+        service.addHit(endpointHitDto);
     }
 
     @GetMapping("/stats")
     public List<ViewStats> getStats(
-            @RequestParam(name = "start") @DateTimeFormat(pattern = DATE_TIME) LocalDateTime start,
-            @RequestParam(name = "end") @DateTimeFormat(pattern = DATE_TIME) LocalDateTime end,
+            @RequestParam(name = "start") @DateTimeFormat(pattern = dateTime) LocalDateTime start,
+            @RequestParam(name = "end") @DateTimeFormat(pattern = dateTime) LocalDateTime end,
             @RequestParam(required = false) List<String> uris,
             @RequestParam(defaultValue = "false") boolean unique) {
         log.info("Processing get stats request");
-        return statsService.getStats(start, end, uris, unique);
+        return service.getStats(start, end, uris, unique);
     }
 }
