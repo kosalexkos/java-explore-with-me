@@ -24,7 +24,7 @@ public class StatsController {
 
     @PostMapping("/hit")
     public void addHit(@RequestBody EndpointHitDto endpointHitDto) {
-        log.info("Request to create entry: {}", endpointHitDto.toString());
+        log.info("Request to add entry: {}", endpointHitDto.toString());
         service.addHit(endpointHitDto);
     }
 
