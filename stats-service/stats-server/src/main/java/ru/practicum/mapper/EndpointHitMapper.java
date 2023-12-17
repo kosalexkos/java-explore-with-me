@@ -6,7 +6,7 @@ import ru.practicum.model.EndpointHit;
 public class EndpointHitMapper {
     public static EndpointHit toEndpointHit(EndpointHitDto dto) {
         return EndpointHit.builder()
-                .id(Long.valueOf(dto.getId()))
+                .id(dto.getId())
                 .app(dto.getApp())
                 .uri(dto.getUri())
                 .ip(dto.getIp())
