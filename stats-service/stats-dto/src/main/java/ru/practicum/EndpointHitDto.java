@@ -17,17 +17,15 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EndpointHitDto {
     Integer id;
-    @NotNull
     @NotBlank
     String app;
     @NotBlank
-    private String uri;
-    @NotNull
+    String uri;
     @NotBlank
     @Length(min = 7, max = 15)
-    private String ip;
+    String ip;
     @NotNull
     @JsonProperty("timestamp")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime timestamp;
+    LocalDateTime timestamp;
 }
