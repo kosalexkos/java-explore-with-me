@@ -2,7 +2,6 @@ package ru.practicum.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,6 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 public class StatsController {
-    @Autowired
     private final StatsService service;
     public final String dateTime = "yyyy-MM-dd HH:mm:ss";
 

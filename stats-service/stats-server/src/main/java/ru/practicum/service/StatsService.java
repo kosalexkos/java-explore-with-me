@@ -1,7 +1,6 @@
 package ru.practicum.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.EndpointHitDto;
@@ -16,7 +15,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class StatsService {
-    @Autowired
     private final StatsRepository statsRepository;
 
     @Transactional
@@ -27,12 +25,10 @@ public class StatsService {
 
     @Transactional(readOnly = true)
     public List<ViewStats> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
-        if (uris != null) {
-            return (unique) ? statsRepository.findUniqueStats(start, end, uris) :
-                    statsRepository.findStats(start, end, uris);
-        } else {
-            return (unique) ? statsRepository.findUniqueStats(start, end) :
-                    statsRepository.findStats(start, end);
+        if (start == null || end == null || start.isAfter(end)) {
+            throw new RuntimeException("Invalid date range OR 'start' or 'end' is null");
         }
+        return (unique) ? statsRepository.findUniqueStats(start, end, uris) :
+                statsRepository.findStats(start, end, uris);
     }
 }
