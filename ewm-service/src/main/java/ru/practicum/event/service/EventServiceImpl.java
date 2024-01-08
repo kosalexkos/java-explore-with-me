@@ -327,7 +327,7 @@ public class EventServiceImpl implements EventService {
                                             int from,
                                             int size,
                                             HttpServletRequest request) {
-        if (categories != null && categories.size() == 1 && categories.get(0).equals(0L)) {
+        if (categories != null && categories.size() == 1 && categories.get(0).equals(0)) {
             categories = null;
         }
         if (rangeStart != null && rangeEnd != null && rangeStart.isAfter(rangeEnd)) {
@@ -436,7 +436,7 @@ public class EventServiceImpl implements EventService {
     }
 
     private void checkInitiator(Integer userId, Integer eventId, Integer initiatorId) {
-        if (userId != initiatorId) {
+        if (!userId.equals(initiatorId)) {
             throw new NotFoundException("Event with id=" + eventId + " was not found");
         }
     }
