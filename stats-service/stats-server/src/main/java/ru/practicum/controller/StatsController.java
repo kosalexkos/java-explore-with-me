@@ -19,14 +19,16 @@ import java.util.List;
 public class StatsController {
     public static final String DATE_TIME = "yyyy-MM-dd HH:mm:ss";
     private final StatsService statsService;
+    private final String path = "/hit";
+    private final String path1 = "/stats";
 
-    @PostMapping("/hit")
+    @PostMapping(path)
     @ResponseStatus(HttpStatus.CREATED)
     public void addHit(@Valid @RequestBody EndpointHitDto endpointHitDto) {
         statsService.addHit(endpointHitDto);
     }
 
-    @GetMapping("/stats")
+    @GetMapping(path1)
     public List<ViewStats> getStats(
             @RequestParam(name = "start", required = false) @DateTimeFormat(pattern = DATE_TIME) LocalDateTime start,
             @RequestParam(name = "end", required = false) @DateTimeFormat(pattern = DATE_TIME) LocalDateTime end,

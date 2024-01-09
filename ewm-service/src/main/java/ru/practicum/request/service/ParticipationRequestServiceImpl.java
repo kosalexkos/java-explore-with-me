@@ -1,7 +1,6 @@
 package ru.practicum.request.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.event.dto.EventState;
@@ -24,11 +23,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ParticipationRequestServiceImpl implements ParticipationRequestService {
-    @Autowired
     private final ParticipationRequestRepository participationRepository;
-    @Autowired
     private final UserRepository userRepository;
-    @Autowired
     private final EventRepository eventRepository;
 
     @Override

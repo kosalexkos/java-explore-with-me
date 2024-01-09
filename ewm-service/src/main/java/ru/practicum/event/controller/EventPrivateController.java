@@ -22,6 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventPrivateController {
     private final EventService eventService;
+    private final String path = "/{eventId}";
+    private final String path1 = "/{eventId}/requests";
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -30,27 +32,27 @@ public class EventPrivateController {
         return eventService.create(userId, eventNewDto);
     }
 
-    @PatchMapping("/{eventId}")
+    @PatchMapping(path)
     public EventFullDto patchEventInfo(@PathVariable Integer userId,
                                        @PathVariable Integer eventId,
                                        @Valid @RequestBody EventUpdateUserRequest updateEventUserRequest) {
         return eventService.patchByInitiator(userId, eventId, updateEventUserRequest);
     }
 
-    @PatchMapping("/{eventId}/requests")
+    @PatchMapping(path1)
     public EventRequestStatusUpdateResult patchEventRequests(@PathVariable Integer userId,
                                                              @PathVariable Integer eventId,
                                                              @Valid @RequestBody EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest) {
         return eventService.patchParticipationRequestsByInitiator(userId, eventId, eventRequestStatusUpdateRequest);
     }
 
-    @GetMapping("/{eventId}")
+    @GetMapping(path)
     public EventFullDto getById(@PathVariable Integer userId,
                                 @PathVariable Integer eventId) {
         return eventService.getByIdByInitiator(userId, eventId);
     }
 
-    @GetMapping("/{eventId}/requests")
+    @GetMapping(path1)
     public List<ParticipationRequestDto> getParticipationByInitiator(@PathVariable Integer userId,
                                                                      @PathVariable Integer eventId) {
         return eventService.getParticipationRequestsByInitiator(userId, eventId);

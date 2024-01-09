@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping(path = "/users/{userId}/requests")
 public class RequestPrivateController {
     private final ParticipationRequestService participationService;
+    private final String path = "/{requestId}/cancel";
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -21,7 +22,7 @@ public class RequestPrivateController {
         return participationService.create(userId, eventId);
     }
 
-    @PatchMapping("/{requestId}/cancel")
+    @PatchMapping(path)
     public ParticipationRequestDto patch(@PathVariable Integer userId,
                                          @PathVariable Integer requestId) {
         return participationService.patch(userId, requestId);

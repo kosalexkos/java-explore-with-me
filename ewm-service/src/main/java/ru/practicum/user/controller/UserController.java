@@ -1,7 +1,6 @@
 package ru.practicum.user.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.user.service.UserService;
@@ -15,8 +14,8 @@ import java.util.List;
 @RequestMapping(path = "/admin/users")
 @RequiredArgsConstructor
 public class UserController {
-    @Autowired
     private final UserService userService;
+    private final String path = "/{userId}";
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,7 +30,7 @@ public class UserController {
         return userService.get(ids, from, size);
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping(path)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer userId) {
         userService.delete(userId);

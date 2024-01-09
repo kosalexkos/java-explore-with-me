@@ -1,7 +1,6 @@
 package ru.practicum.category.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.category.dto.CategoryDto;
@@ -13,8 +12,8 @@ import javax.validation.Valid;
 @RequestMapping(path = "/admin/categories")
 @RequiredArgsConstructor
 public class CategoryAdminController {
-    @Autowired
     private final CategoryService categoryService;
+    private final String path = "/{catId}";
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -22,13 +21,13 @@ public class CategoryAdminController {
         return categoryService.create(categoryDto);
     }
 
-    @PatchMapping("/{catId}")
+    @PatchMapping(path)
     public CategoryDto update(@PathVariable Integer catId,
                               @Valid @RequestBody CategoryDto categoryDto) {
         return categoryService.patch(catId, categoryDto);
     }
 
-    @DeleteMapping("/{catId}")
+    @DeleteMapping(path)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer catId) {
         categoryService.delete(catId);

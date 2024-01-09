@@ -1,7 +1,8 @@
 package ru.practicum.event.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -42,19 +43,14 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventServiceImpl implements EventService {
-    @Autowired
-    private final EventRepository eventRepository;
-    @Autowired
-    private final UserRepository userRepository;
-    @Autowired
-    private final CategoryRepository categoryRepository;
-    @Autowired
-    private final LocationRepository locationRepository;
-    @Autowired
-    private final ParticipationRequestRepository participationRepository;
-    @Autowired
-    private final StatsClient statsClient;
+    final EventRepository eventRepository;
+    final UserRepository userRepository;
+    final CategoryRepository categoryRepository;
+    final LocationRepository locationRepository;
+    final ParticipationRequestRepository participationRepository;
+    final StatsClient statsClient;
 
     @Override
     @Transactional

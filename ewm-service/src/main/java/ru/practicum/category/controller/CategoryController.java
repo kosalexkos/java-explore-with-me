@@ -1,7 +1,6 @@
 package ru.practicum.category.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.service.CategoryService;
@@ -14,8 +13,8 @@ import java.util.List;
 @RequestMapping("/categories")
 @RequiredArgsConstructor
 public class CategoryController {
-    @Autowired
     private final CategoryService categoryService;
+    private final String path = "/{catId}";
 
     @GetMapping
     public List<CategoryDto> getAll(@Valid @RequestParam(defaultValue = "0") @Min(0) int from,
@@ -23,7 +22,7 @@ public class CategoryController {
         return categoryService.getAll(from, size);
     }
 
-    @GetMapping("/{catId}")
+    @GetMapping(path)
     public CategoryDto getById(@PathVariable Integer catId) {
         return categoryService.getById(catId);
     }

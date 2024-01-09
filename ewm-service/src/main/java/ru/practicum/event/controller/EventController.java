@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventController {
     private final EventService eventService;
+    private final String path = "/{eventId}";
 
     @GetMapping
     public List<EventShortDto> getAll(@RequestParam(defaultValue = "") String text,
@@ -34,7 +35,7 @@ public class EventController {
         return eventService.getAllPublic(text, categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, from, size, request);
     }
 
-    @GetMapping("{eventId}")
+    @GetMapping(path)
     public EventFullDto getById(@PathVariable Integer eventId, HttpServletRequest request) {
         return eventService.getByIdPublic(eventId, request);
     }

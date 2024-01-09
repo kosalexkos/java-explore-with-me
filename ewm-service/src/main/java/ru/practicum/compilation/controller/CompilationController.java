@@ -1,7 +1,6 @@
 package ru.practicum.compilation.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.compilation.dto.CompilationDto;
 import ru.practicum.compilation.service.CompilationService;
@@ -14,8 +13,8 @@ import java.util.List;
 @RequestMapping(path = "/compilations")
 @RequiredArgsConstructor
 public class CompilationController {
-    @Autowired
     private final CompilationService compilationService;
+    private final String path = "/{compId}";
 
     @GetMapping
     public List<CompilationDto> getAll(@RequestParam(required = false) Boolean pinned,
@@ -24,7 +23,7 @@ public class CompilationController {
         return compilationService.getAll(pinned, from, size);
     }
 
-    @GetMapping("/{compId}")
+    @GetMapping(path)
     public CompilationDto getById(@PathVariable Integer compId) {
         return compilationService.getById(compId);
     }

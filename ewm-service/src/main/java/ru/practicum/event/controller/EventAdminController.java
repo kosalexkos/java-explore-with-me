@@ -21,8 +21,9 @@ import java.util.List;
 public class EventAdminController {
     @Autowired
     private final EventService eventService;
+    private final String path = "/{eventId}";
 
-    @PatchMapping("/{eventId}")
+    @PatchMapping(path)
     public EventFullDto patch(@PathVariable Integer eventId,
                               @Valid @RequestBody EventUpdateAdminRequest updateEventAdminRequest) {
         return eventService.patchByAdmin(eventId, updateEventAdminRequest);
