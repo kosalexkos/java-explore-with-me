@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdatedCommentDto {
-
     @NotBlank
     @Size(max = 5000)
     private String text;
